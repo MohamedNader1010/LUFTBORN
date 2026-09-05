@@ -34,11 +34,11 @@ Client ID: **luftborn-api**
 Key settings already configured:
 
 - **Valid Redirect URIs:**
-  - `http://localhost:5519/signin-oidc`
-  - `https://localhost:44365/signin-oidc`
+  - `http://localhost:5001/signin-oidc`
+  - `https://localhost:7250/signin-oidc`
 - **Valid Post-Logout Redirect URIs / Web Origins:**
-  - `https://localhost:44365`
-  - `http://localhost:5519`
+  - `https://localhost:7250`
+  - `http://localhost:5001`
 - **Audience:** a standalone client scope `luftborn-audience` with an Audience mapper targeting `luftborn-api`, attached as a **Default** client scope
   - ⚠️ The mapper must be set to add the audience to the **access token**, not the ID token — this was the root cause of an earlier audience-mismatch failure.
 
@@ -50,7 +50,7 @@ The Keycloak section includes:
 - `ClientId`
 - `ClientSecret`
 - `MetadataAddress`
-- `DefaultReturnUrl` → points to Swagger
+- `DefaultReturnUrl`
 
 ### 4. Run the API
 
