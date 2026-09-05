@@ -1,0 +1,46 @@
+<!-- users-list.component.html -->
+<div class="p-6">
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-2xl font-bold">Users</h1>
+
+        <a *hasPermission="permissions.User.Create" routerLink="/users/new"
+            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+            New User
+        </a>
+    </div>
+
+    @if (loading()) {
+    <p>Loading...</p>
+    } @else {
+    <table class="w-full border-collapse">
+        <thead>
+            <tr class="text-left border-b">
+                <th class="py-2">First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (user of users(); track user.id) {
+            <tr class="border-b">
+                <td class="py-2">{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.email }}</td>
+                <td class="text-right space-x-2">
+
+                    <a *hasPermission="'User.Update'" [routerLink]="['/users', user.id, 'edit']"
+                        class="text-blue-600 hover:underline">
+                        Edit
+                    </a>
+                    <button *hasPermission="'User.Delete'" type="button" (click)="deleteUser(user.id)"
+                        class="text-red-600 hover:underline">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    }
+</div>

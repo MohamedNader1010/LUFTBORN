@@ -1,0 +1,31 @@
+<div class="p-6 max-w-md">
+    <h1 class="text-2xl font-bold mb-4">{{ isEditMode() ? 'Edit User' : 'New User' }}</h1>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
+        <div>
+            <label class="block text-sm mb-1">First Name</label>
+            <input formControlName="firstName" class="w-full border rounded px-3 py-2" />
+        </div>
+
+        <div>
+            <label class="block text-sm mb-1">Last Name</label>
+            <input formControlName="lastName" class="w-full border rounded px-3 py-2" />
+        </div>
+
+        <div>
+            <label class="block text-sm mb-1">Email</label>
+            <input formControlName="email" type="email" class="w-full border rounded px-3 py-2" />
+        </div>
+
+        @if (!isEditMode()) {
+        <div>
+            <label class="block text-sm mb-1">Password</label>
+            <input formControlName="password" type="password" class="w-full border rounded px-3 py-2" />
+        </div>
+        }
+
+        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+            {{ isEditMode() ? 'Update' : 'Create' }}
+        </button>
+    </form>
+</div>
