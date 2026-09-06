@@ -1,0 +1,18 @@
+<div class="min-h-screen xl:flex">
+  <div>
+    <lb-sidebar></lb-sidebar>
+    <lb-backdrop></lb-backdrop>
+  </div>
+
+  <div class="flex-1 transition-all duration-300 ease-in-out" [ngClass]="{
+      'xl:ms-[290px]': (isExpanded$ | async) || (isHovered$ | async),
+      'xl:ms-[90px]': !(isExpanded$ | async) && !(isHovered$ | async),
+      'ms-0': (isMobileOpen$ | async)
+    }">
+    <lb-header />
+
+    <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
