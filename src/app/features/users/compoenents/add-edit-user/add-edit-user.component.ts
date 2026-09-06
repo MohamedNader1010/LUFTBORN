@@ -25,8 +25,7 @@ export class AddEditUserComponent {
   form = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    password: [''],
+    email: ['', [Validators.required, Validators.email]]
   });
 
   ngOnInit(): void {
@@ -57,7 +56,7 @@ export class AddEditUserComponent {
       return;
     }
 
-    const { firstName, lastName, email, password } = this.form.getRawValue();
+    const { firstName, lastName, email } = this.form.getRawValue();
 
     if (this.isEditMode()) {
       this.userService
@@ -76,11 +75,15 @@ export class AddEditUserComponent {
         });
     } else {
       this.userService
-        .create({ firstName: firstName!, lastName: lastName!, email: email!, password: password! })
+        .create({
+          firstName: firstName!, lastName: lastName!, email: email!
+        })
         .subscribe({
           next: () => {
             this.toastr.success('User created');
-            this.router.navigate(['/users']);
+            this.router.navigate(['/users']).then(success => {
+              console.log('nav result:', success);
+            }).catch(err => console.error('nav error:', err));
           },
           error: () => this.toastr.error('Failed to create user'),
         });
