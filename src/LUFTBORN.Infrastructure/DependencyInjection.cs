@@ -4,7 +4,6 @@ using System.Net.Mail;
 using LUFTBORN.Application.Common.Interfaces;
 using LUFTBORN.Application.Common.Settings;
 using LUFTBORN.Infrastructure.Common.Persistence;
-using LUFTBORN.Infrastructure.Products.Persistence;
 using LUFTBORN.Infrastructure.Security;
 using LUFTBORN.Infrastructure.Security.CurrentUserProvider;
 using LUFTBORN.Infrastructure.Security.PolicyEnforcer;
@@ -79,7 +78,6 @@ public static class DependencyInjection
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
         services.AddScoped<IUsersRepository, UsersRepository>();
-        services.AddScoped<IProductsRepository, ProductRepository>();
 
         return services;
     }

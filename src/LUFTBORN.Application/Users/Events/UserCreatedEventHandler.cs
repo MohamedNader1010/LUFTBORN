@@ -1,5 +1,4 @@
 ﻿using LUFTBORN.Application.Common.Interfaces;
-using LUFTBORN.Domain.Products.Events;
 using LUFTBORN.Domain.Users.Events;
 
 using MediatR;

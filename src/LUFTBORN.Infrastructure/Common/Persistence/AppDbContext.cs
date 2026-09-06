@@ -1,6 +1,4 @@
-using LUFTBORN.Domain.Categories;
 using LUFTBORN.Domain.Common;
-using LUFTBORN.Domain.Products;
 using LUFTBORN.Domain.Users;
 
 using LUFTBORN.Infrastructure.Common.Middleware;
@@ -15,8 +13,6 @@ namespace LUFTBORN.Infrastructure.Common.Persistence;
 public class AppDbContext(DbContextOptions options, IHttpContextAccessor _httpContextAccessor, IPublisher _publisher) : DbContext(options)
 {
     public DbSet<User> Users { get; set; } = null!;
-    public DbSet<Product> Products { get; set; } = null!;
-    public DbSet<Category> Categories { get; set; } = null!;
 
     public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
