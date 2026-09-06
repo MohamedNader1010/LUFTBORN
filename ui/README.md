@@ -1,59 +1,62 @@
-# LUFTBORN
+# Luftborn – Angular UI
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.6.
+Angular front-end for the Luftborn technical test, using SSO authentication via Keycloak against the Luftborn API.
 
-## Development server
+## Project Structure
 
-To start a local development server, run:
+The app follows a `core / feature / shared / layout` structure:
+
+```
+src/app/
+├── core/          # Singleton services, guards, interceptors, app-wide config
+├── features/      # Feature modules/components (e.g. users)
+├── shared/        # Reusable components, pipes, directives shared across features
+├── layouts/       # Application shell layout(s)
+```
+
+### Layout
+
+There is a single main layout component (`MainLayoutComponent`) that all pages inherit from. It contains:
+
+- **Header**
+- **Sidebar**
+- **Backdrop** (for mobile/overlay sidebar behavior)
+
+All routed pages render inside this shell.
+
+### Interceptors
+
+Four HTTP interceptors are registered under `core/`:
+
+| Interceptor | Responsibility |
+|---|---|
+| **Logger** | Logs outgoing requests / incoming responses |
+| **Loader** | Toggles a global loading indicator during in-flight requests |
+| **Error** | Centralized HTTP error handling (e.g. toast notifications, redirects) |
+| **Auth** | Attaches the access token to outgoing requests |
+
+## Authentication
+
+Authentication is handled via **SSO with Keycloak**, integrated against the same `LUFTBORN` realm and `luftborn-api` client used by the backend.
+
+## Features
+
+- Simple CRUD for the **Users** feature (list, create, edit).
+- Route-level permission guards (`permissionGuard`) controlling access per action (e.g. `User.Get`, `User.Create`, `User.Update`).
+
+## Styling
+
+Styled with **Tailwind CSS**.
+
+## Getting Started
 
 ```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The app will be available at `http://localhost:4200` (or as configured).
 
-## Code scaffolding
+## Backend
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This UI expects the Luftborn API to be running and reachable, with Keycloak configured for the `LUFTBORN` realm. See the `backend/` folder in this repo for API setup.
