@@ -7,10 +7,8 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import {
-  HTTP_INTERCEPTORS,
   provideHttpClient,
-  withInterceptors,
-  withInterceptorsFromDi,
+  withInterceptors
 } from '@angular/common/http';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { errorInterceptor } from './core/interceptors/error.interceptor';
